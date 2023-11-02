@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     const { username, message } = req.body;
     if ( !message) {
-        res.status(400).json({ message: "Required data is missing" });
+        res.status(400).json({ message: "Data is missing" });
     }
     try {
         const newMessage = await messagesManager.createOne(req.body);

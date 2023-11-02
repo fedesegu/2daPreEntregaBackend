@@ -7,7 +7,6 @@ import { __dirname } from "./utils.js";
 import viewsRouter from "./routes/views.router.js";
 import messageRouter from "./routes/messages.router.js";
 
-// DB
 import "./db/configDB.js";
 
 const app = express();
