@@ -98,8 +98,4 @@ router.put("/:idCart", async (req, res) => {
   }
 });
 
-
-
-
-
 export default router;
