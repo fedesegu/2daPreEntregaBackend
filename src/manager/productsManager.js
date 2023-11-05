@@ -2,7 +2,7 @@ import { response } from "express";
 import { productsModel } from "../dao/models/products.model.js";
 
 
-class ProductManagerDB {
+class ProductManager {
     async findAll(obj) {
         const { limit = 10, page = 1, order = 0, ...query } = obj;
         let sort
@@ -56,4 +56,4 @@ class ProductManagerDB {
     };
 }
 
-export { ProductManagerDB };
+export const productsManager = new ProductManager;

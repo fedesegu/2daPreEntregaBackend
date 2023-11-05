@@ -1,6 +1,6 @@
 import { cartsModel } from "../dao/models/carts.model.js";
 
-class CartManagerDB {
+class CartManager {
     async findAllCart() {
         const response = await cartsModel.find();
         return response;
@@ -87,4 +87,4 @@ class CartManagerDB {
     };
 }
 
-export { CartManagerDB };
+export const CartManager = new CartManager;

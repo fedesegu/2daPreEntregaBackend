@@ -2,11 +2,11 @@ import { Router } from "express";
 import { cartsManager } from "../manager/cartsManager.js"
 
 const router = Router();
-const cartsManager = new cartsManager();
+const cartManager = new cartsManager();
 
 router.get("/", async (req, res) => {
   try {
-    const carts = await cartsManager.findAllCart()
+    const carts = await cartManager.findAllCart()
     res.status(200).json({ message: "carts total", carts });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 router.get("/:idCart", async (req, res) => {
   const { idCart } = req.params;
   try {
-    const cart = await cartsManager.findCartById(idCart);
+    const cart = await cartManager.findCartById(idCart);
     res.status(200).json({ message: "cart by id", cart });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -25,7 +25,7 @@ router.get("/:idCart", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-  const cart = await cartsManager.createCart();
+  const cart = await cartManager.createCart();
   res.json({ cart });} catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
 router.post("/:idCart/products/:idProduct", async (req, res) => {
   const { idCart, idProduct } = req.params;
   try {
-    const addedProduct = await cartsManager.addProductToCart(idCart, idProduct);
+    const addedProduct = await cartManager.addProductToCart(idCart, idProduct);
     res.status(200).json({ message: "Added Product", product: addedProduct });
   } catch (error) {
     console.log(error);
@@ -45,7 +45,7 @@ router.post("/:idCart/products/:idProduct", async (req, res) => {
 router.delete("/:idCart", async (req, res) => {
   const { idCart } = req.params;
   try {
-    const response = await cartsManager.deleteTotalProductToCart(idCart);
+    const response = await cartManager.deleteTotalProductToCart(idCart);
     if (!response) {
       return res.status(404).json({ message: "cart not found" });
     }
@@ -59,7 +59,7 @@ router.delete("/:idCart", async (req, res) => {
 router.delete("/:idCart/products/:idProduct", async (req, res) => {
   const { idCart, idProduct } = req.params;
   try {
-    const response = await cartsManager.deleteProductToCart(idCart, idProduct);
+    const response = await cartManager.deleteProductToCart(idCart, idProduct);
     if (!response) {
       return res.status(404).json({ message: "product not founded" });
     }
@@ -73,7 +73,7 @@ router.put("/:idCart/products/:idProduct", async (req, res) => {
   const { idCart, idProduct } = req.params;
   const { quantity } = req.body;
   try {
-    const response = await cartsManager.addProductToCartQuantity(idCart, idProduct, quantity);
+    const response = await cartManager.addProductToCartQuantity(idCart, idProduct, quantity);
     if (!response) {
       return res.status(404).json({ message: "cart not found" });
     }
@@ -88,7 +88,7 @@ router.put("/:idCart", async (req, res) => {
   const { newProducts } = req.body;
   console.log(newProducts);
   try {
-    const response = await cartsManager.updateCart(idCart, newProducts);
+    const response = await cartManager.updateCart(idCart, newProducts);
     if (!response) {
       return res.status(404).json({ message: "cart not founded" });
     }
